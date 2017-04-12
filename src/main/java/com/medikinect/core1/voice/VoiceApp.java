@@ -10,22 +10,39 @@ import com.google.cloud.speech.v1beta1.SpeechRecognitionResult;
 import com.google.cloud.speech.v1beta1.SyncRecognizeResponse;
 import com.google.protobuf.ByteString;
 
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
+
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 
-
+@SuppressWarnings("restriction")
 public class VoiceApp {
 	
 	
 	static final long RECORD_TIME = 4000;  // 4 seconds
-  public static void main(String... args) throws Exception {
+  @SuppressWarnings("restriction")
+public static void main(String... args) throws Exception {
     // Instantiates a client
     SpeechClient speech = SpeechClient.create();
 //
+    //open the sound file as a Java input stream
+    String gongFile = "/Users/robertdooley/Downloads/Are you ok.wav";
+    InputStream in = new FileInputStream(gongFile);
+
+    // create an audiostream from the inputstream
+    AudioStream audioStream = new AudioStream(in);
+
+    // play the audio clip with the audioplayer class
+    AudioPlayer.player.start(audioStream);
     
+    TimeUnit.MILLISECONDS.sleep(4000);
     
     
 //    figure out how to get line in and save file
@@ -100,14 +117,17 @@ public class VoiceApp {
     	  System.out.println("T: "+alternative.getTranscript());
     	  System.out.println("C: "+alternative.getConfidence());
     	  
-    	  if (alternative.getTranscript().contains("help")){//what is recognised
+    	  if ((alternative.getTranscript().contains("help")) && (alternative.getConfidence() > 0.7) && !alternative.getTranscript().contains("ok")){
     		  
-    		  System.out.print("help worked!");
+    		  System.out.print("help needed!");
     	  }
+    	  if ((alternative.getTranscript().contains("ok")) && (alternative.getConfidence() > 0.7))
+    	  {
+    		  System.out.println("Everything is OK");
+    	  }
+    		  
+    		  
     	  
-    	  if (alternative.getConfidence() > 0.5){
-    		 System.out.print("above 50% confidence");
-    	  }
     	  
 //    	  System.out.print(alternative);
     	  

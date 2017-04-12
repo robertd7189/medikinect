@@ -20,11 +20,14 @@ import java.util.List;
 public class VoiceApp {
 	
 	
-	static final long RECORD_TIME = 10000;  // 10 seconds
+	static final long RECORD_TIME = 4000;  // 4 seconds
   public static void main(String... args) throws Exception {
     // Instantiates a client
     SpeechClient speech = SpeechClient.create();
 //
+    
+    
+    
 //    figure out how to get line in and save file
     final JavaSoundRecorder recorder = new JavaSoundRecorder();
 	 

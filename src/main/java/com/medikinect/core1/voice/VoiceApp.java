@@ -100,7 +100,8 @@ public class VoiceApp {
     	  System.out.println("T: "+alternative.getTranscript());
     	  System.out.println("C: "+alternative.getConfidence());
     	  
-    	  if (alternative.getTranscript().contains("help")){
+    	  if (alternative.getTranscript().contains("help")){//what is recognised
+    		  
     		  System.out.print("help worked!");
     	  }
     	  

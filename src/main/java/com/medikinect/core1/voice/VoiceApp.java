@@ -15,22 +15,41 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-public class JavaSoundRecorder()
-{
-	
-}
+
 
 public class VoiceApp {
+	
+	
+	static final long RECORD_TIME = 10000;  // 10 seconds
   public static void main(String... args) throws Exception {
     // Instantiates a client
     SpeechClient speech = SpeechClient.create();
 //
 //    figure out how to get line in and save file
-    
+    final JavaSoundRecorder recorder = new JavaSoundRecorder();
+	 
+    // creates a new thread that waits for a specified
+    // of time before stopping
+    Thread stopper = new Thread(new Runnable() {
+        public void run() {
+            try {
+                Thread.sleep(RECORD_TIME);
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
+            recorder.finish();
+        }
+    });
+
+    stopper.start();
+
+    // start recording
+    recorder.start();
     
     
     // The path to the audio file to transcribe
     String fileName = "/Users/robertdooley/Downloads/helppush.wav";
+    //update
 
     // Reads the audio file into memory
     Path path = Paths.get(fileName);
@@ -75,8 +94,8 @@ public class VoiceApp {
     	  
     	  //"If you are in need of assistance, reply with help, help help (three times).
     	  //"I need help"
-    	  System.out.print("T: "+alternative.getTranscript());
-    	  System.out.print("C: "+alternative.getConfidence());
+    	  System.out.println("T: "+alternative.getTranscript());
+    	  System.out.println("C: "+alternative.getConfidence());
     	  
     	  if (alternative.getTranscript().contains("help")){
     		  System.out.print("help worked!");

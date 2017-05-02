@@ -68,7 +68,8 @@ public static void main(String... args) throws Exception {
     
     
     // The path to the audio file to transcribe
-    String fileName = "/Users/robertdooley/Downloads/helppush.wav";
+    // /Users/robertdooley/Downloads
+    String fileName = ("././././helpfilecreated.wav");
     //update
 
     // Reads the audio file into memory
@@ -117,6 +118,10 @@ public static void main(String... args) throws Exception {
     	  System.out.println("T: "+alternative.getTranscript());
     	  System.out.println("C: "+alternative.getConfidence());
     	  
+    	  if ((alternative.getTranscript().contains("")) && (alternative.getConfidence() > 0.7) && !alternative.getTranscript().contains("ok")){
+    		  
+    		  System.out.print("nothing said, help needed!");
+    	  }
     	  if ((alternative.getTranscript().contains("help")) && (alternative.getConfidence() > 0.7) && !alternative.getTranscript().contains("ok")){
     		  
     		  System.out.print("help needed!");

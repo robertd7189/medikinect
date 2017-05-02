@@ -21,7 +21,7 @@ public class JavaSoundRecorder {
     static final long RECORD_TIME = 3000;  // 3 seconds
  
     // path of the wav file
-    File wavFile = new File("/Users/robertdooley/Downloads/helppush.wav");
+    File wavFile = new File("././././helpfilecreated.wav");
  
     // format of audio file
     AudioFileFormat.Type fileType = AudioFileFormat.Type.WAVE;

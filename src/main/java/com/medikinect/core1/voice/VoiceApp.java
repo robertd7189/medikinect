@@ -27,8 +27,7 @@ public class VoiceApp {
 	
 	
 	static final long RECORD_TIME = 4000;  // 4 seconds
-  @SuppressWarnings("restriction")
-public static void main(String... args) throws Exception {
+  public static void main(String... args) throws Exception {
     // Instantiates a client
     SpeechClient speech = SpeechClient.create();
 //
@@ -118,10 +117,7 @@ public static void main(String... args) throws Exception {
     	  System.out.println("T: "+alternative.getTranscript());
     	  System.out.println("C: "+alternative.getConfidence());
     	  
-    	  if ((alternative.getTranscript().contains("")) && (alternative.getConfidence() > 0.7) && !alternative.getTranscript().contains("ok")){
-    		  
-    		  System.out.print("nothing said, help needed!");
-    	  }
+    	  
     	  if ((alternative.getTranscript().contains("help")) && (alternative.getConfidence() > 0.7) && !alternative.getTranscript().contains("ok")){
     		  
     		  System.out.print("help needed!");

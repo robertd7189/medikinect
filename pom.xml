@@ -24,7 +24,7 @@
     <dependency>
     	<groupId>com.google.cloud</groupId>
     	<artifactId>google-cloud-speech</artifactId>
-    	<version>0.11.1-alpha</version>
+    	<version>0.17.2-alpha</version>
     </dependency>
   </dependencies>
 </project>
